@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>HA-Productos</title>
+	<link href="css/bootstrap.min.css" rel="stylesheet">
+	<link href="css/all.min.css" rel="stylesheet">
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="css/datepicker3.css" rel="stylesheet">
+	<link href="css/styles.css" rel="stylesheet">
+
+	
+	<!--Custom Font-->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+	<!--[if lt IE 9]>
+	<script src="js/html5shiv.js"></script>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+    
+    <!--firestore-->
+    
+</head>
+<body>
+ 
+	<nav class="navbar navbar-custom navbar-fixed-top" role="navigation">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#sidebar-collapse"><span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span></button>
+                <a class="navbar-brand" href="Inicio.html"><img src = "source/logo-ipn.png" width="45" height="45"></a>
+                
+				<a class="navbar-brand" href="Inicio.html"><img src = "source/Upiicsa.png" width="45" height="45"></a>
+                
+				<ul class="nav navbar-top-links navbar-right">
+                </ul>
+            </div>
+        </div>
+	</nav>
+<div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
+		<ul class="nav menu">
+            
+            <li class=""><a href="Inicio.html"><em class="fa fa-home">&nbsp;</em>Inicio</a></li>
+            
+            <li id="comp" class="parent"><a class="active" data-toggle="collapse" href="#sub-item-1">
+				<em class="fa fa-shopping-cart">&nbsp;</em> Compras <span data-toggle="collapse" href="#sub-item-1" class="icon pull-right"><em class="fa fa-plus"></em></span>
+				</a>
+				<ul class="children collapse" id="sub-item-1">
+					<li><a class="active" href="productos.html">
+						<span class="fa fa-arrow-right">&nbsp;</span> Productos
+                    </a></li>
+				</ul>
+			</li>
+            
+			<li><a href="index.html" onclick="logout()" ><em class="fa fa-power-off">&nbsp;</em> Salida </a></li>
+		</ul>
+	</div><!--/.sidebar-->
+
+	<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+		<div class="row">
+			<ol class="breadcrumb">
+				<li><a href="#">
+					<em class="fa fa-home"></em>
+				</a></li>
+				<li>Compras</li>
+                <li class="active">Productos</li>
+			</ol>
+		</div><!--/.row-->
+		
+		<div class="row">
+			<div class="col-lg-12">
+				<h1 class="page-header">Productos</h1>
+			</div>
+		</div><!--/.row-->
+        
+        <button onclick="document.getElementById('modal-wrapper').style.display='block'" style="width:300px; margin-left:850px;">Nuevo Producto <em class="fa fa-plus"></em></button>
+
+<div id="modal-wrapper" class="modal">
+  
+  <div class="modal-content animate">
+       
+    <div class="imgcontainer">
+      <span onclick="limpiar()" class="close" title="Cerrar">&times;</span>
+      <h1 style="text-align:center">Alta De Productos</h1>
+    </div>
+      
+
+
+      <div  class="card">
+
+
+           <center>
+              
+            <div>
+                <div style="float: left; width: 50%;">
+                Codigo&nbsp;<i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Codigo de identificacion del producto"></i>
+                  <br>         
+
+                <input type="text" maxlength="20" oninput="if(this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" id="codigo" placeholder="Codigo" class="form-control my-3" style="width: 80%;" required>
+              </div>
+              <div style="float: right; width: 50%;">
+                Titulo&nbsp;<i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Nombre comercial del Producto"></i>
+              <br>               
+                <input type="text" id="titulo" placeholder="Titulo" class="form-control my-3" style="width: 80%;" required>
+              </div>  
+            </div>
+              <br>
+              <div>
+                <div style="float: left; width: 50%;">
+                Costo&nbsp;<i class="fa fa-info-circle" data-toggle="tooltip" data-placement="top" title="Costo para determinar el inventario inicial"></i>
+                  <br>
+                <input type="text" id="costo" placeholder="Costo (Mxn)" class="form-control my-3" style="width: 80%;">
+
+                <br>
+                <br> 
+              </div>
+              </div>
+              
+            
+            <br>
+              
+            
+              
+            <br>
+            <br>
+            
+              
+            <div style="float: left; width: 50%;">
+                  <br>
+                Unidades Disponibles&nbsp;           
+            <br>
+                <input type="text" id="UD" placeholder="Unidades Disponibles" class="form-control my-3" style="width: 80%;">
+            </div>
+            <br>
+            
+            
+            
+            <br>
+            
+            
+              </center>
+      </div>
+
+      
+    <center>
+        <div class="container">
+            <button style="width: 50%; text-align: center;" onclick="agre()" id="Bguar">Agregar</button>
+        </div>
+    </center>
+    </div>
+
+</div>
+        <br><br>
+        <table class="table my-1">
+  <thead>
+    <tr>
+      <th scope="col" style="text-align: center;">ID</th>
+      <th scope="col" style="text-align: center;">Producto</th>
+      <th scope="col" style="text-align: center;">Precio</th>
+      <th scope="col" style="text-align: center;">Unidades Disponibles</th>
+      <th scope="col" style="text-align: center;">Editar</th>
+      <th scope="col" style="text-align: center;">Eliminar</th>
+    </tr>
+  </thead>
+  <tbody id="Produc">
+    
+  </tbody>
+</table>
+        
+		
+		</div>
+	
+	<script src="js/jquery-1.11.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/chart.min.js"></script>
+	<script src="js/chart-data.js"></script>
+	<script src="js/easypiechart.js"></script>
+	<script src="js/easypiechart-data.js"></script>
+	<script src="js/bootstrap-datepicker.js"></script>
+	<script src="js/custom.js"></script>
+        <!-- The core Firebase JS SDK is always required and must be listed first -->
+
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase.js"></script>
+<script src="https://www.gstatic.com/firebasejs/7.7.0/firebase-auth.js"></script>
+    
+<script src="js/Prod.js"></script>   
+    
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyAHlj_tn8i8m-xTFCGcOKazDQEgFLkzlTo",
+    authDomain: "fir-1502.firebaseapp.com",
+    projectId: "fir-1502",
+    storageBucket: "fir-1502.appspot.com",
+    messagingSenderId: "448381963649",
+    appId: "1:448381963649:web:a4e1bcef0123bc2e0b2c80",
+    measurementId: "G-Z3LGGNQYY4"
+  };
+  // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    firebase.analytics();
+</script>
+    
+    <script src="js/R3.js"></script>
+        
+        <script>
+            // If user clicks anywhere outside of the modal, Modal will close
+            var modal = document.getElementById(‘modal-wrapper’);
+            window.onclick = function(event) {
+            if (event.target == modal) {
+            modal.style.display = “none”;
+            }
+            }
+        </script>
+
+		
+</body>
+</html>
